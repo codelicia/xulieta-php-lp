@@ -1,0 +1,18 @@
+{
+    "name": "codelicia/xulieta-php-lp",
+    "description": "Xulieta Plugin for supporting of Literate programming",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "Codelicia\\XulietaPhpLP\\": "src/"
+        }
+    },
+    "require": {
+        "php": ">=7.4 || ~8.0"
+    },
+    "require-dev": {
+        "codelicia/xulieta": "1.0.x-dev as 1.0.0",
+        "doctrine/coding-standard": "^8.2.0",
+        "phpunit/phpunit": "^9.4"
+    }
+}
