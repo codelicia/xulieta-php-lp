@@ -29,9 +29,7 @@ final class LiterateProgramming implements Validator
     public function hasViolation(SampleCode $sampleCode): bool
     {
         try {
-            $this->phpParser->parse(
-                $this->ensureCodePrefix($sampleCode->code())
-            );
+            $this->phpParser->parse($sampleCode->code());
         } catch (Throwable $e) {
             return true;
         }
@@ -42,9 +40,7 @@ final class LiterateProgramming implements Validator
     public function getViolation(SampleCode $sampleCode): Violation
     {
         try {
-            $this->phpParser->parse(
-                $this->ensureCodePrefix($sampleCode->code())
-            );
+            $this->phpParser->parse($sampleCode->code());
         } catch (Throwable $e) {
             preg_match('{on line (\d+)}', $e->getMessage(), $line);
 
@@ -54,14 +50,5 @@ final class LiterateProgramming implements Validator
         }
 
         throw new LogicException();
-    }
-
-    private function ensureCodePrefix(string $code): string
-    {
-        if (! preg_match('/<\?(=|php)/i', $code)) {
-            return '<?php ' . PHP_EOL . $code;
-        }
-
-        return $code;
     }
 }
