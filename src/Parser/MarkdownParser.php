@@ -39,20 +39,15 @@ final class MarkdownParser implements Parser
     {
         // TODO: Use tangled code so we can execute everything at the end
         //       by getting a unique sample code with all the code we need
-        $sampleCode    = [];
+        $sampleCode    = '';
         $chunks        = preg_split(self::PATTERN, $file->getContents(), -1, PREG_SPLIT_DELIM_CAPTURE);
-        $startPosition = 0;
-        $endPosition   = 0;
 
         foreach ($chunks as $documentChunk) {
             $lines        = explode("\n", $documentChunk);
-            $endPosition += count($lines);
 
             preg_match('/^```/', $lines[0] ?? '', $matches);
 
             if ($matches === []) {
-                $startPosition = $endPosition;
-
                 continue;
             }
 
@@ -61,13 +56,10 @@ final class MarkdownParser implements Parser
 
             array_pop($lines);
 
-            $codeBlock = implode("\n", $lines);
-
-            $sampleCode[] = new SampleCode($file->getPathname(), $language, $startPosition, $codeBlock);
-
-            $startPosition = $endPosition;
+            $sampleCode .= "\n" . implode("\n", $lines);
         }
 
-        return $sampleCode;
+        // @todo fix issue with the "language" variable
+        return $sampleCode ? [new SampleCode($file->getPathname(), $language, 0, $sampleCode)] : [];
     }
 }
