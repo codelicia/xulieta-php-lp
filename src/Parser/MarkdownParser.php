@@ -10,7 +10,6 @@ use Symfony\Component\Finder\SplFileInfo;
 
 use function array_pop;
 use function array_shift;
-use function count;
 use function explode;
 use function implode;
 use function in_array;
