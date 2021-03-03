@@ -1,5 +1,5 @@
 --TEST--
-Report success with a valid json
+Report success with a valid php code
 --FILE--
 <?php
 
