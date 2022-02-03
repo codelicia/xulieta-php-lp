@@ -17,7 +17,7 @@
     },
     "extra": {
         "xulieta": {
-            "validator": "Codelicia\\XulietaPhpLP\\LiterateProgramming"
+            "validator": ["Codelicia\\XulietaPhpLP\\LiterateProgramming"]
         }
     }
 }
