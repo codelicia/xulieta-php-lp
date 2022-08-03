@@ -13,11 +13,18 @@
     "require-dev": {
         "codelicia/xulieta": "1.0.x-dev as 1.0.0",
         "doctrine/coding-standard": "^9.0.0",
-        "phpunit/phpunit": "^9.4"
+        "phpunit/phpunit": "^9.5"
     },
     "extra": {
         "xulieta": {
             "validator": ["Codelicia\\XulietaPhpLP\\LiterateProgramming"]
+        }
+    },
+    "config": {
+        "allow-plugins": {
+            "dealerdirect/phpcodesniffer-composer-installer": true,
+            "ocramius/package-versions": true,
+            "codelicia/xulieta": true
         }
     }
 }
