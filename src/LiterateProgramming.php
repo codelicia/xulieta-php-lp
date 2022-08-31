@@ -12,6 +12,8 @@ use PhpParser\Parser as PhpParser;
 use PhpParser\ParserFactory;
 use Throwable;
 
+use function preg_match;
+
 final class LiterateProgramming implements Validator
 {
     private PhpParser $phpParser;
