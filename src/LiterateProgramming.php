@@ -32,7 +32,8 @@ final class LiterateProgramming implements Validator
     {
         try {
             $this->phpParser->parse($sampleCode->code());
-        } catch (Throwable $e) {
+            (new CodeRunner())->__invoke($sampleCode->code());
+        } catch (Throwable) {
             return true;
         }
 
@@ -43,10 +44,11 @@ final class LiterateProgramming implements Validator
     {
         try {
             $this->phpParser->parse($sampleCode->code());
+            (new CodeRunner())->__invoke($sampleCode->code());
         } catch (Throwable $e) {
             preg_match('{on line (\d+)}', $e->getMessage(), $line);
 
-            $validationErrorInLine = $line[1] ?? 0;
+            $validationErrorInLine = $line[1] ?? '0';
 
             return new Violation($sampleCode, $e->getMessage(), (int) $validationErrorInLine);
         }
