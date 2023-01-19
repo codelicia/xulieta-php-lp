@@ -12,17 +12,17 @@ use function ini_get;
 
 final class CodeRunner
 {
-    private Strategy $canEvaluate;
+    private Strategy $strategy;
 
     public function __construct()
     {
-        $this->canEvaluate = ini_get('suhosin.executor.disable_eval')
+        $this->strategy = ini_get('suhosin.executor.disable_eval')
             ? new TemporaryFileStrategy()
             : new EvalStrategy();
     }
 
     public function __invoke(string $code): string
     {
-        return $this->canEvaluate->__invoke($code);
+        return $this->strategy->__invoke($code);
     }
 }
