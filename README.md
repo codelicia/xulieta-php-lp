@@ -1,6 +1,11 @@
 📚 Xulieta - Literate programming
 =================================
 
+> **Warning**
+> This library is highly experimental.
+
+#### 🤓 Literate programming?
+
 [Literate programming][1] is a programming paradigm introduced by Donald Knuth in
 which a computer program is given an explanation of its logic in a natural language,
 such as English, interspersed with snippets of macros and traditional source code,
@@ -10,7 +15,8 @@ purposes. Literate programming tools are used by millions of programmers today.
 
 ---
 
-**NOTE**: For now we just lint PHP code, we don't run it.
+> **Note**
+> This library will lint and run php code, be careful with side-effects.
 
 ### Installation
 
@@ -36,7 +42,7 @@ commenting.
 
 We recommend the usage of [cs2pr][2].
 
- ```
+ ```shell script
  ./vendor/bin/xulieta check:erromeu <directory> --output=checkstyle | cs2pr
  ```
 
@@ -49,12 +55,54 @@ In order to enable it, you should configure the `.xulieta.xml` with the followin
 <?xml version="1.0" encoding="UTF-8" ?>
 <xulieta xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:noNamespaceSchemaLocation="./vendor/codelicia/xulieta/xulieta.xsd">
-    
+
     <parser>Codelicia\XulietaPhpLP\Parser\MarkdownParser</parser>
     <validator>Codelicia\XulietaPhpLP\LiterateProgramming</validator>
-    
+
 </xulieta>
  ```
+
+### Internals
+
+<details>
+  <summary>Click to see the internal diagram</summary>
+
+```mermaid
+classDiagram
+direction BT
+class CodeRunner {
+   __invoke(code)
+}
+class EvalStrategy {
+   __invoke(code)
+}
+class LiterateProgramming {
+   getViolation(sampleCode)
+   supports(sampleCode)
+   hasViolation(sampleCode)
+}
+class MarkdownParser {
+   supportedExtensions()
+   supports(file)
+   getAllSampleCodes(file)
+}
+class Strategy {
+   __invoke(code)
+}
+class TemporaryFileStrategy {
+   __invoke(code)
+}
+class Validator {
+   getViolation(sampleCode)
+   supports(sampleCode)
+   hasViolation(sampleCode)
+}
+
+EvalStrategy  ..>  Strategy
+LiterateProgramming  ..>  Validator
+TemporaryFileStrategy  ..>  Strategy
+```
+</details>
 
 ## Author 🎩✨
 
